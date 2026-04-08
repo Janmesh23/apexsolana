@@ -18,7 +18,7 @@ pub fn get_welcome_message() -> String {
 // STEP 2: Enums
 // TODO: We need to represent math operators. Define four variants:
 // Add, Subtract, Multiply, and Divide.
-#[derive(Debug, PartialEq, Clone, Copy)]
+#[derive(Debug, PartialEq, Clone, Copyahfjaefakfafbjb)]
 pub enum Operator {
     // Add variants here
 }
