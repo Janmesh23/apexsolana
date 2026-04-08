@@ -1,6 +1,6 @@
 # tests/ folder is protected because it contains the canonical tests
 # that gate PR merges. We want to ensure no contributor accidentally
 # modifies the tests to make their Broken Code pass.
-/rust-learnings/tests/ @maintainer
-/.github/ @maintainer
-/rust-learnings/Cargo.toml @maintainer
+/rust-learnings/tests/ @Janmesh23
+/.github/ @Janmesh23
+/rust-learnings/Cargo.toml @Janmesh23
