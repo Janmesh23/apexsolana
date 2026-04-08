@@ -118,6 +118,12 @@ jobs:
         working-directory: rust-learnings
     steps:
       - uses: actions/checkout@v4
+      - name: Checkout Private Tests
+        uses: actions/checkout@v4
+        with:
+          repository: Janmesh23/apexsolana-tests
+          token: ${{ secrets.PRIVATE_TESTS_TOKEN }}
+          path: rust-learnings/tests
       - uses: dtolnay/rust-toolchain@stable
       - uses: actions/cache@v3
         with:
