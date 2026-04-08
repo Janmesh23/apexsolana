@@ -32,27 +32,39 @@ pub enum ConfigError {
     InvalidAge(String),
     #[error("Invalid config format")]
     InvalidFormat,
+    #[error("IO error: {0}")]
+    IoError(#[from] std::io::Error),
 }
 
 // TODO: Change parse_user_config to return Result<User, ConfigError>
 // TODO: Replace every .unwrap() with proper ? propagation
 // TODO: Use the ConfigError variants you defined
-pub fn parse_user_config(input: &str) -> User {
+pub fn parse_user_config(input: &str) -> Result<User, ConfigError> {
     let parts: Vec<&str> = input.split(':').collect();
-    
-    // Panics if the format doesn't have 3 parts
-    let name = parts.get(0).unwrap().to_string();
-    let age_str = parts.get(1).unwrap();
-    let age = age_str.parse::<u8>().unwrap();
-    let email = parts.get(2).unwrap().to_string();
 
-    User { name, age, email }
+    if parts.len() != 3 {
+        return Err(ConfigError::InvalidFormat);
+    }
+
+    let name = parts[0].to_string();
+    if name.is_empty() {
+        return Err(ConfigError::MissingField);
+    }
+
+    let age_str = parts[1];
+    let age = age_str.parse::<u8>().map_err(|_| ConfigError::InvalidAge(age_str.to_string()))?;
+
+    let email = parts[2].to_string();
+    if email.is_empty() {
+        return Err(ConfigError::MissingField);
+    }
+
+    Ok(User { name, age, email })
 }
 
 // TODO: Change load_config_file to return Result<String, ConfigError>
-pub fn load_config_file(path: &str) -> String {
-    // Panics if the file doesn't exist
-    fs::read_to_string(path).unwrap()
+pub fn load_config_file(path: &str) -> Result<String, ConfigError> {
+    fs::read_to_string(path).map_err(ConfigError::from)
 }
 
 #[cfg(test)]
@@ -63,13 +75,13 @@ mod tests {
     //       The real tests live in tests/ and run on CI.
     #[test]
     fn test_valid_parse_local_hint() {
-        // let result = parse_user_config("alice:25:alice@email.com");
-        // assert!(result.is_ok());
+        let result = parse_user_config("alice:25:alice@email.com");
+        assert!(result.is_ok());
     }
 
     #[test]
     fn test_invalid_age_local_hint() {
-        // let result = parse_user_config("bob:twenty:bob@email.com");
-        // assert_eq!(result, Err(ConfigError::InvalidAge("twenty".to_string())));
+        let result = parse_user_config("bob:twenty:bob@email.com");
+        assert_eq!(result, Err(ConfigError::InvalidAge("twenty".to_string())));
     }
 }
