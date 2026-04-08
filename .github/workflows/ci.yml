@@ -10,9 +10,7 @@ jobs:
     outputs:
       issue_number: ${{ steps.check.outputs.issue_number }}
     permissions:
-      pull-requests: write
       contents: read
-      issues: write
     steps:
       - uses: actions/checkout@v4
         with:
@@ -20,9 +18,6 @@ jobs:
 
       - name: Validate PR Scope
         id: check
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_URL: ${{ github.event.pull_request.html_url }}
         run: |
           changed_files=$(git diff --name-only origin/main...${{ github.sha }})
           issue_count=0
@@ -30,8 +25,7 @@ jobs:
           
           for file in $changed_files; do
             if [[ "$file" == rust-learnings/tests/* ]]; then
-              gh pr comment $PR_URL --body "⚠️ The \`tests/\` directory is protected. Please revert any changes you made there, as it breaks the validation pipeline."
-              gh pr edit $PR_URL --add-label "⚠️ do-not-merge"
+              echo "::error::⚠️ The tests/ directory is protected. Please revert any changes you made there."
               exit 1
             fi
             
@@ -42,13 +36,12 @@ jobs:
           done
           
           if [[ $issue_count -gt 1 ]]; then
-            gh pr comment $PR_URL --body "Please keep each PR to a single issue. We detected changes to multiple issue files. Open separate PRs for each issue."
-            gh pr edit $PR_URL --add-label "⚠️ do-not-merge"
+            echo "::error::Please keep each PR to a single issue. We detected changes to multiple issue files."
             exit 1
           fi
           
           if [[ $issue_count -eq 0 ]]; then
-            gh pr comment $PR_URL --body "No issue files in \`rust-learnings/src/issues/\` were changed. Please read [CONTRIBUTING.md](./rust-learnings/CONTRIBUTING.md) to see how to contribute."
+            echo "::error::No issue files in src/issues/ were changed."
             exit 1
           fi
           
@@ -59,9 +52,6 @@ jobs:
   fmt:
     needs: validate-pr-scope
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
-      issues: write
     defaults:
       run:
         working-directory: rust-learnings
@@ -71,16 +61,11 @@ jobs:
         with:
           components: rustfmt
       - name: Check formatting
-        run: cargo fmt --all -- --check || (gh pr comment ${{ github.event.pull_request.html_url }} --body "Please run \`cargo fmt\` locally before pushing." && exit 1)
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: cargo fmt --all -- --check
 
   clippy:
     needs: validate-pr-scope
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
-      issues: write
     defaults:
       run:
         working-directory: rust-learnings
@@ -99,24 +84,11 @@ jobs:
             target/
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       - name: Run clippy
-        run: |
-          if ! cargo clippy -- -D warnings > clippy_output.txt 2>&1; then
-            OUTPUT=$(cat clippy_output.txt)
-            gh pr comment ${{ github.event.pull_request.html_url }} --body "Clippy found some issues. Please run \`cargo clippy\` locally to see and fix them:
-            \`\`\`
-            $OUTPUT
-            \`\`\`"
-            exit 1
-          fi
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: cargo clippy -- -D warnings
 
   test:
     needs: [fmt, clippy, validate-pr-scope]
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
-      issues: write
     defaults:
       run:
         working-directory: rust-learnings
@@ -140,42 +112,5 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       - name: Run tests
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUM: ${{ needs.validate-pr-scope.outputs.issue_number }}
-          PR_URL: ${{ github.event.pull_request.html_url }}
-        run: |
-          if ! cargo test $ISSUE_NUM > test_output.txt 2>&1; then
-            OUTPUT=$(cat test_output.txt)
-            gh pr comment $PR_URL --body "Tests failed for issue $ISSUE_NUM. Keep an eye on the error details below!
-            
-            \`\`\`
-            $OUTPUT
-            \`\`\`"
-            gh pr edit $PR_URL --add-label "❌ tests-failing"
-            gh pr edit $PR_URL --remove-label "✅ tests-passing" || true
-            exit 1
-          else
-            OUTPUT=$(cat test_output.txt)
-            gh pr comment $PR_URL --body "Yay! Tests passed for issue $ISSUE_NUM! 🎉
-            
-            \`\`\`
-            $OUTPUT
-            \`\`\`"
-            gh pr edit $PR_URL --add-label "✅ tests-passing"
-            gh pr edit $PR_URL --remove-label "❌ tests-failing" || true
-          fi
-
-  all-checks-passed:
-    needs: [fmt, clippy, test]
-    runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
-      issues: write
-    steps:
-      - env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_URL: ${{ github.event.pull_request.html_url }}
-        run: |
-          gh pr comment $PR_URL --body "🎉 All checks passed! Your solution is correct.
-          A maintainer will review and merge shortly.
-          While you wait, check out the next issue: [link to issues page]"
+        run: cargo test $ISSUE_NUM
