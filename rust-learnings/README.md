@@ -1,6 +1,6 @@
 # rust-learnings
 
-![Build Status](https://img.shields.io/github/actions/workflow/status/ORIGINAL_OWNER/rust-learnings/ci.yml?branch=main)
+![Build Status](https://img.shields.io/github/actions/workflow/status/Janmesh23/apexsolana/ci.yml?branch=main)
 ![Rust Version](https://img.shields.io/badge/rust-1.75%2B-blue)
 
 ## What is this?
