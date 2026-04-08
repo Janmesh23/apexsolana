@@ -29,11 +29,4 @@ Check out [CONTRIBUTING.md](./CONTRIBUTING.md) to start your first issue!
 - **Step 3:** Make a branch
 - **Step 4:** Fix code & push!
 
-## For Maintainers
-To add a new learning issue:
-- [ ] Add `src/issues/0N_new_issue.rs`
-- [ ] Add `tests/0N_new_issue_tests.rs`
-- [ ] Add `pub mod` export to `src/issues/mod.rs`
-- [ ] Add a new row to the README curriculum table
-- [ ] Create a corresponding GitHub Issue with the standard template
-- [ ] Pre-create any required GitHub labels
+
