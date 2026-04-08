@@ -1,18 +1,6 @@
-// ============================================================
-// BASICS: CLI Calculator Mini-Project
-// 
-// Welcome to Rust! This file is a safe playground where you can learn
-// the basics by building a text-based calculator.
-// 
-// Fix the functions below step-by-step.
-// Run `cargo test test_calculator` locally to test your code.
-// ============================================================
 
-// STEP 1: Basic Functions & Strings
-// TODO: Return a nice greeting message. It should return a `String` (owned),
-// not just a string literal (`&str`).
 pub fn get_welcome_message() -> String {
-    "Welcome to the Rust Calculator!".to_string()
+    "Welcome to the Calculator!".to_string()
 }
 
 // STEP 2: Enums
