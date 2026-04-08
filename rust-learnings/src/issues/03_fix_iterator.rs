@@ -8,7 +8,7 @@
 // Idiomatic Rust heavily relies on iterators (`.iter()`, `.map()`, `.filter()`, etc.).
 // Rewrite the functions below to use iterator chains instead of manual loops.
 //
-// Hint: Iterators are lazy, you must call a consuming method like `collect()` 
+// Hint: Iterators are lazy, you must call a consuming method like `collect()`
 // or `sum()` to execute them.
 //
 // Resources: https://doc.rust-lang.org/book/ch13-02-iterators.html
@@ -42,24 +42,24 @@ pub fn average_grade(students: &[Student]) -> f64 {
     if students.is_empty() {
         return 0.0;
     }
-    
+
     let mut total = 0;
     for student in students {
         total += student.grade;
     }
-    
+
     total as f64 / students.len() as f64
 }
 
 // TODO: Implement using .iter().max_by_key()
 // Returns None for empty slice, Some(&Student) for the highest grade
-pub fn top_student(students: &[Student]) -> Option<&Student> {
+pub fn top_student(_students: &[Student]) -> Option<&Student> {
     todo!("Find the top student using iterators")
 }
 
 // TODO: Use .iter().fold() or a clever .collect() into a HashMap
 // Returns a map of grade → count of students with that grade
-pub fn grade_distribution(students: &[Student]) -> HashMap<u32, usize> {
+pub fn grade_distribution(_students: &[Student]) -> HashMap<u32, usize> {
     todo!("Calculate grade distribution")
 }
 
@@ -72,8 +72,16 @@ mod tests {
     #[test]
     fn test_passing_students_local_hint() {
         let students = vec![
-            Student { name: "Alice".into(), grade: 90, passed: true },
-            Student { name: "Bob".into(), grade: 40, passed: false },
+            Student {
+                name: "Alice".into(),
+                grade: 90,
+                passed: true,
+            },
+            Student {
+                name: "Bob".into(),
+                grade: 40,
+                passed: false,
+            },
         ];
         let passed = passing_students(&students);
         assert_eq!(passed, vec!["Alice"]);

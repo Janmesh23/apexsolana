@@ -6,7 +6,7 @@
 // Your Task:
 // The code below parses a user config string and reads a file, but it uses
 // `.unwrap()` everywhere, which can cause the program to panic on bad input.
-// Refactor the code to use proper error handling by returning `Result` types 
+// Refactor the code to use proper error handling by returning `Result` types
 // and using the `?` operator to propagate errors.
 //
 // Hint: A function returning Result<T, E> can use `?` on operations that also return Result.
@@ -41,6 +41,12 @@ pub enum ConfigError {
 // TODO: Use the ConfigError variants you defined
 pub fn parse_user_config(input: &str) -> Result<User, ConfigError> {
     let parts: Vec<&str> = input.split(':').collect();
+
+    // Panics if the format doesn't have 3 parts
+    let name = parts.first().unwrap().to_string();
+    let age_str = parts.get(1).unwrap();
+    let age = age_str.parse::<u8>().unwrap();
+    let email = parts.get(2).unwrap().to_string();
 
     if parts.len() != 3 {
         return Err(ConfigError::InvalidFormat);
