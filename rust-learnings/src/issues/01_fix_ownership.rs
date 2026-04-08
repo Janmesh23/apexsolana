@@ -19,6 +19,12 @@ pub struct Library {
     pub books: Vec<String>,
 }
 
+impl Default for Library {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl Library {
     pub fn new() -> Self {
         Library { books: Vec::new() }

@@ -1,9 +1,9 @@
 // ============================================================
 // BASICS: CLI Calculator Mini-Project
-// 
+//
 // Welcome to Rust! This file is a safe playground where you can learn
 // the basics by building a text-based calculator.
-// 
+//
 // Fix the functions below step-by-step.
 // Run `cargo test test_calculator` locally to test your code.
 // ============================================================
@@ -26,14 +26,14 @@ pub enum Operator {
 // STEP 3: Control Flow (Match statements)
 // TODO: Take a character like '+' or '-' and return the matching Operator.
 // Use a `match` statement. If the character is unknown, return an Error String.
-pub fn parse_operator(op_char: char) -> Result<Operator, String> {
+pub fn parse_operator(_op_char: char) -> Result<Operator, String> {
     todo!("Match the char to your enum, or return Err(...)")
 }
 
 // STEP 4: Math & Error Handling
-// TODO: Perform the calculation. Return an Ok(i32) with the result, 
+// TODO: Perform the calculation. Return an Ok(i32) with the result,
 // OR an Err(String) if they try to divide by zero!
-pub fn calculate(a: i32, op: Operator, b: i32) -> Result<i32, String> {
+pub fn calculate(_a: i32, _op: Operator, _b: i32) -> Result<i32, String> {
     todo!("Return Ok(result) or Err(\"Divide by zero!\")")
 }
 
@@ -41,7 +41,7 @@ pub fn calculate(a: i32, op: Operator, b: i32) -> Result<i32, String> {
 // TODO: Take a string like "5 + 3" and parse it into its components.
 // Hint: `input.split_whitespace().collect::<Vec<&str>>()` will be very useful.
 // Use `parse::<i32>()` to convert strings to numbers.
-pub fn parse_equation(input: &str) -> Result<(i32, Operator, i32), String> {
+pub fn parse_equation(_input: &str) -> Result<(i32, Operator, i32), String> {
     todo!("Split the string, parse the numbers and operator, and return them as a tuple")
 }
 
