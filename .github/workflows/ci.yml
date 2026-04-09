@@ -97,7 +97,7 @@ jobs:
       - name: Checkout Private Tests
         uses: actions/checkout@v4
         with:
-          repository: Janmesh23/apexsolana-tests
+          repository: Janmesh23/apexrust-tests
           token: ${{ secrets.PRIVATE_TESTS_TOKEN }}
           path: rust-learnings/tests
       - uses: dtolnay/rust-toolchain@stable

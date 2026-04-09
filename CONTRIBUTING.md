@@ -1,4 +1,4 @@
-# Contributing to apexsolana/rust-learnings
+# Contributing to apexrust/rust-learnings
 
 Welcome to our FOSS Weekend Rust Learning repository! We are excited to have you contribute and learn Rust with us.
 
@@ -37,14 +37,14 @@ You will not be pushing directly to this repository. You must use a "fork".
 1. **Fork the Repository**: Click the `"Fork"` button in the top-right corner of this GitHub repository page to create a copy under your own account.
 2. **Clone your Fork**:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/apexsolana.git
-   cd apexsolana/rust-learnings
+   git clone https://github.com/YOUR_USERNAME/apexrust.git
+   cd apexrust/rust-learnings
    ```
    *(Note: All curriculum work takes place exclusively inside the `rust-learnings/` folder.)*
 
 3. **Configure Upstream** *(Optional but recommended)*:
    ```bash
-   git remote add upstream https://github.com/Janmesh23/apexsolana.git
+   git remote add upstream https://github.com/Janmesh23/apexrust.git
    ```
 
 ---

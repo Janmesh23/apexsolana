@@ -4,7 +4,7 @@ import requests
 import sys
 
 # Configuration
-REPO = os.getenv("GITHUB_REPOSITORY", "Janmesh23/apexsolana")
+REPO = os.getenv("GITHUB_REPOSITORY", "Janmesh23/apexrust")
 TOKEN = os.getenv("GITHUB_TOKEN")
 README_PATH = "rust-learnings/README.md"
 
