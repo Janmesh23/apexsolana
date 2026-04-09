@@ -24,7 +24,7 @@ Welcome to `rust-learnings`! This repository is designed to teach Rust concepts 
 
 ## Getting Started
 
-Check out [CONTRIBUTING.md](./CONTRIBUTING.md) to start your first issue!
+Check out [CONTRIBUTING.md](../CONTRIBUTING.md) to start your first issue!
 - **Step 1:** Fork the repo
 - **Step 2:** Clone it locally
 - **Step 3:** Make a branch
