@@ -8,7 +8,7 @@ jobs:
   validate-pr-scope:
     runs-on: ubuntu-latest
     outputs:
-      issue_number: ${{ steps.check.outputs.issue_number }}
+      issue_base: ${{ steps.check.outputs.issue_base }}
     permissions:
       contents: read
     steps:
@@ -45,9 +45,9 @@ jobs:
             exit 1
           fi
           
-          # Extract just the "01" part
-          issue_num=$(basename "$issue_file" | cut -d'_' -f1)
-          echo "issue_number=$issue_num" >> $GITHUB_OUTPUT
+          # Extract the precise issue name
+          issue_base=$(basename "$issue_file" .rs)
+          echo "issue_base=$issue_base" >> $GITHUB_OUTPUT
 
   fmt:
     needs: validate-pr-scope
@@ -112,5 +112,5 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       - name: Run tests
         env:
-          ISSUE_NUM: ${{ needs.validate-pr-scope.outputs.issue_number }}
-        run: cargo test $ISSUE_NUM
+          ISSUE_BASE: ${{ needs.validate-pr-scope.outputs.issue_base }}
+        run: cargo test --test ${ISSUE_BASE}_tests
