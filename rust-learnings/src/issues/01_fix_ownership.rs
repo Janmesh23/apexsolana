@@ -35,18 +35,19 @@ impl Library {
 // after adding the book.
 pub fn add_book(mut library: Library, title: String) -> Library {
     library.books.push(title);
-    library
+    // return nothing, caller loses access
+    todo!("Return the library")
 }
 
 // TODO: Change this to borrow library instead of taking ownership.
-pub fn print_books(library: &Library) {
+pub fn print_books(library: Library) {
     for book in &library.books {
         println!("Book: {}", book);
     }
 }
 
 // TODO: Change to borrowing and return a &str or clone only what's needed.
-pub fn first_book(library: &Library) -> String {
+pub fn first_book(library: Library) -> String {
     if library.books.is_empty() {
         "No books".to_string()
     } else {
