@@ -18,6 +18,7 @@ Welcome to `rust-learnings`! This repository is designed to teach Rust concepts 
 | Issue # | Title | Concept | Difficulty | Status |
 |---|---|---|---|---|
 | Basics | [CLI Calculator](src/basics/calculator.rs) | Variables, Types, Control Flow, Parsing | Beginner | 🛠️ Playground |
+| Basics | [Guessing Game](src/basics/guessing_game.rs) | std::io, match, rand, loops | Beginner | 🛠️ Playground |
 | #01 | [Fix Ownership](src/issues/01_fix_ownership.rs) | Ownership and move semantics | Beginner | 🟢 Open |
 | #02 | [Remove Unwraps](src/issues/02_remove_unwraps.rs) | Result, Option & Error Handling | Beginner | 🟢 Open |
 | #03 | [Fix Iterator](src/issues/03_fix_iterator.rs) | Iterators & Adaptors | Beginner/Intermediate | 🟢 Open |
