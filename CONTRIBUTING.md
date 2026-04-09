@@ -6,7 +6,7 @@ Since this repository is used for teaching and grading, we have a very specific 
 
 ---
 
-## 🛠️ Step 1: Local Environment Setup
+## Step 1: Local Environment Setup
 
 Before writing any code, ensure you have the proper tools installed:
 
@@ -30,7 +30,7 @@ Before writing any code, ensure you have the proper tools installed:
 
 ---
 
-## 🐙 Step 2: Fork and Clone
+## Step 2: Fork and Clone
 
 You will not be pushing directly to this repository. You must use a "fork".
 
@@ -49,7 +49,7 @@ You will not be pushing directly to this repository. You must use a "fork".
 
 ---
 
-## 💻 Step 3: Branching & Coding
+## Step 3: Branching & Coding
 
 1. **Create a fresh branch** off `main` for the specific issue you are tackling:
    ```bash
@@ -58,13 +58,13 @@ You will not be pushing directly to this repository. You must use a "fork".
 2. **Open the Issue**: Open `rust-learnings/src/issues/01_fix_ownership.rs` (or whichever issue you chose) in your editor.
 3. **Solve the TODOs**: Fix the intentionally broken starter code based on your Rust knowledge!
 
-### ⚠️ Critical Project Rules:
+### Critical Project Rules:
 * **ONLY EDIT ONE ISSUE PER PR**: If you edit `01_fix_ownership.rs` and `02_remove_unwraps.rs` in the same commit, our CI firewall will instantly reject your PR.
-* **NEVER EDIT `tests/`**: The `tests/` directory is monitored by security checks. If you try to change the tests to make your code pass, your PR will fail and be flagged with `⚠️ do-not-merge`.
+* **NEVER EDIT `tests/`**: The `tests/` directory is monitored by security checks. If you try to change the tests to make your code pass, your PR will fail and be flagged with `do-not-merge`.
 
 ---
 
-## 🧪 Step 4: Testing & Formatting Locally
+## Step 4: Testing & Formatting Locally
 
 Our automated pipeline is extremely strict. It treats all console warnings as hard errors. **Never push code without running these three commands locally inside the `rust-learnings/` directory:**
 
@@ -88,7 +88,7 @@ Our automated pipeline is extremely strict. It treats all console warnings as ha
 
 ---
 
-## 🚀 Step 5: Submitting your Pull Request
+## Step 5: Submitting your Pull Request
 
 1. **Commit your single file**:
    ```bash
@@ -100,11 +100,11 @@ Our automated pipeline is extremely strict. It treats all console warnings as ha
 3. **Wait for CI Grading**:
    Within seconds, the GitHub Action bots will pick up your PR.
    * If it succeeds, a maintainer will merge it!
-   * If it fails, look for the big red ❌ at the bottom of the PR thread.
+   * If it fails, look for the big red X at the bottom of the PR thread.
 
 ### How to read CI errors:
 We DO NOT post automated comments on your PR. **If the CI fails, click the tiny "Details" link** next to the red X at the bottom of the page. It will open the console logs showing you exactly which test failed, where your formatting was wrong, or instructions on how to fix your code!
 
 *Mistakes happen! If CI fails, you don't need to open a new PR. Just fix the code locally, run `git add`, `git commit`, and `git push` again to the same branch. The pipeline will automatically re-run.*
 
-Happy coding and enjoy the weekend! 🎉
+Happy coding and enjoy the weekend!
